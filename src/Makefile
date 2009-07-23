@@ -1,6 +1,6 @@
 # Hey Emacs, this is a -*- makefile -*-
 #----------------------------------------------------------------------------
-# WinAVR Makefile Template written by Eric B. Weddington, Jörg Wunsch, et al.
+# WinAVR Makefile Template written by Eric B. Weddington, J<F6>rg Wunsch, et al.
 #
 # Released to the Public Domain
 #
@@ -27,7 +27,7 @@
 # make program = Download the hex file to the device, using avrdude.
 #                Please customize the avrdude settings below first!
 #
-# make debug = Start either simulavr or avarice as specified for debugging, 
+# make debug = Start either simulavr or avarice as specified for debugging,
 #              with avr-gdb or avr-insight as the front end for debugging.
 #
 # make filename.s = Just compile filename.c into the assembler code only.
@@ -44,8 +44,8 @@ MCU = atmega168
 
 
 # Processor frequency.
-#     This will define a symbol, F_CPU, in all source code files equal to the 
-#     processor frequency. You can then use this symbol in your source code to 
+#     This will define a symbol, F_CPU, in all source code files equal to the
+#     processor frequency. You can then use this symbol in your source code to
 #     calculate timings. Do NOT tack on a 'UL' at the end, this will be done
 #     automatically to create a 32-bit value in your source code.
 F_CPU = 1000000
@@ -56,7 +56,7 @@ FORMAT = ihex
 
 
 # Target file name (without extension).
-TARGET = Simon
+TARGET = simon
 
 
 # List C source files here. (C dependencies are automatically generated.)
@@ -70,10 +70,9 @@ SRC = $(TARGET).c
 #     Even though the DOS/Win* filesystem matches both .s and .S the same,
 #     it will preserve the spelling of the filenames, and gcc itself does
 #     care about how the name is spelled on its command-line.
-ASRC = 
+ASRC =
 
-
-# Optimization level, can be [0, 1, 2, 3, s]. 
+# Optimization level, can be [0, 1, 2, 3, s].
 #     0 = turn off optimization. s = optimize for size.
 #     (Note: 3 is not always the best optimization level. See avr-libc FAQ.)
 OPT = s
@@ -90,7 +89,7 @@ DEBUG = dwarf-2
 #     Each directory must be seperated by a space.
 #     Use forward slashes for directory separators.
 #     For a directory that has spaces, enclose it in quotes.
-EXTRAINCDIRS = 
+EXTRAINCDIRS =
 
 
 # Compiler flag to set the C Standard level.
@@ -101,14 +100,14 @@ EXTRAINCDIRS =
 CSTANDARD = -std=gnu99
 
 
-# Place -D or -U options here
-CDEFS = -DF_CPU=$(F_CPU)UL
+# Enable debugging functions in the hardware
+DEBUG_FLAG=-DDEBUG
 
+# Place -D or -U options here
+CDEFS = -DF_CPU=$(F_CPU)UL $(DEBUG_FLAG)
 
 # Place -I options here
 CINCS =
-
-
 
 #---------------- Compiler Options ----------------
 #  -g*:          generate debugging information
@@ -134,7 +133,7 @@ CFLAGS += $(CSTANDARD)
 #             for use in COFF files, additional information about filenames
 #             and function names needs to be present in the assembler source
 #             files -- see avr-libc docs [FIXME: not yet described there]
-ASFLAGS = -Wa,-adhlns=$(<:.S=.lst),-gstabs 
+ASFLAGS = -Wa,-adhlns=$(<:.S=.lst),-gstabs
 
 
 #---------------- Library Options ----------------
@@ -145,7 +144,7 @@ PRINTF_LIB_MIN = -Wl,-u,vfprintf -lprintf_min
 PRINTF_LIB_FLOAT = -Wl,-u,vfprintf -lprintf_flt
 
 # If this is left blank, then it will use the Standard printf version.
-PRINTF_LIB = 
+PRINTF_LIB =
 #PRINTF_LIB = $(PRINTF_LIB_MIN)
 #PRINTF_LIB = $(PRINTF_LIB_FLOAT)
 
@@ -157,7 +156,7 @@ SCANF_LIB_MIN = -Wl,-u,vfscanf -lscanf_min
 SCANF_LIB_FLOAT = -Wl,-u,vfscanf -lscanf_flt
 
 # If this is left blank, then it will use the Standard scanf version.
-SCANF_LIB = 
+SCANF_LIB =
 #SCANF_LIB = $(SCANF_LIB_MIN)
 #SCANF_LIB = $(SCANF_LIB_FLOAT)
 
@@ -192,8 +191,8 @@ LDFLAGS += $(PRINTF_LIB) $(SCANF_LIB) $(MATH_LIB)
 
 #---------------- Programming Options (avrdude) ----------------
 
-# Programming hardware: alf avr910 avrisp bascom bsd 
-# dt006 pavr picoweb pony-stk200 sp12 stk200 
+# Programming hardware: alf avr910 avrisp bascom bsd
+# dt006 pavr picoweb pony-stk200 sp12 stk200
 #
 # Type: avrdude -c ?
 # to get a full listing.
@@ -218,7 +217,7 @@ AVRDUDE_WRITE_FLASH = -U flash:w:$(TARGET).hex
 #AVRDUDE_NO_VERIFY = -V
 
 # Increase verbosity level.  Please use this when submitting bug
-# reports about avrdude. See <http://savannah.nongnu.org/projects/avrdude> 
+# reports about avrdude. See <http://savannah.nongnu.org/projects/avrdude>
 # to submit bug reports.
 #AVRDUDE_VERBOSE = -v -v
 
@@ -250,7 +249,7 @@ JTAG_DEV = /dev/com1
 DEBUG_PORT = 4242
 
 # Debugging host used to communicate between GDB / avarice / simulavr, normally
-#     just set to localhost unless doing some sort of crazy debugging when 
+#     just set to localhost unless doing some sort of crazy debugging when
 #     avarice is running on a different computer.
 DEBUG_HOST = localhost
 
@@ -276,7 +275,7 @@ WINSHELL = cmd
 MSG_ERRORS_NONE = Errors: none
 MSG_BEGIN = -------- begin --------
 MSG_END = --------  end  --------
-MSG_SIZE_BEFORE = Size before: 
+MSG_SIZE_BEFORE = Size before:
 MSG_SIZE_AFTER = Size after:
 MSG_COFF = Converting to AVR COFF:
 MSG_EXTENDED_COFF = Converting to AVR Extended COFF:
@@ -293,10 +292,10 @@ MSG_CLEANING = Cleaning project:
 
 
 # Define all object files.
-OBJ = $(SRC:.c=.o) $(ASRC:.S=.o) 
+OBJ = $(SRC:.c=.o) $(ASRC:.S=.o)
 
 # Define all listing files.
-LST = $(SRC:.c=.lst) $(ASRC:.S=.lst) 
+LST = $(SRC:.c=.lst) $(ASRC:.S=.lst)
 
 
 # Compiler flags to generate dependency files.
@@ -320,7 +319,7 @@ build: elf hex eep lss sym
 elf: $(TARGET).elf
 hex: $(TARGET).hex
 eep: $(TARGET).eep
-lss: $(TARGET).lss 
+lss: $(TARGET).lss
 sym: $(TARGET).sym
 
 
@@ -353,12 +352,12 @@ sizeafter:
 
 
 # Display compiler version information.
-gccversion : 
+gccversion :
 	@$(CC) --version
 
 
 
-# Program the device.  
+# Program the device.
 program: $(TARGET).hex $(TARGET).eep
 	$(AVRDUDE) $(AVRDUDE_FLAGS) $(AVRDUDE_WRITE_FLASH) $(AVRDUDE_WRITE_EEPROM)
 
@@ -366,9 +365,9 @@ program_stk500: $(TARGET).hex $(TARGET).eep
 	$(STK500_PATH)\$(STK500) $(STK500_FLAGS) $(STK500_WRITE_FLASH)
 
 # Generate avr-gdb config/init file which does the following:
-#     define the reset signal, load the target file, connect to target, and set 
+#     define the reset signal, load the target file, connect to target, and set
 #     a breakpoint at main().
-gdb-config: 
+gdb-config:
 	@$(REMOVE) $(GDBINIT_FILE)
 	@echo define reset >> $(GDBINIT_FILE)
 	@echo SIGNAL SIGHUP >> $(GDBINIT_FILE)
@@ -377,31 +376,27 @@ gdb-config:
 	@echo target remote $(DEBUG_HOST):$(DEBUG_PORT)  >> $(GDBINIT_FILE)
 ifeq ($(DEBUG_BACKEND),simulavr)
 	@echo load  >> $(GDBINIT_FILE)
-endif	
+endif
 	@echo break main >> $(GDBINIT_FILE)
-	
+
 debug: gdb-config $(TARGET).elf
 ifeq ($(DEBUG_BACKEND), avarice)
 	@echo Starting AVaRICE - Press enter when "waiting to connect" message displays.
 	@$(WINSHELL) /c start avarice --jtag $(JTAG_DEV) --erase --program --file \
 	$(TARGET).elf $(DEBUG_HOST):$(DEBUG_PORT)
 	@$(WINSHELL) /c pause
-	
 else
 	@$(WINSHELL) /c start simulavr --gdbserver --device $(MCU) --clock-freq \
 	$(DEBUG_MFREQ) --port $(DEBUG_PORT)
 endif
 	@$(WINSHELL) /c start avr-$(DEBUG_UI) --command=$(GDBINIT_FILE)
-	
-
-
 
 # Convert ELF to COFF for use in debugging / simulating in AVR Studio or VMLAB.
 COFFCONVERT=$(OBJCOPY) --debugging \
 --change-section-address .data-0x800000 \
 --change-section-address .bss-0x800000 \
 --change-section-address .noinit-0x800000 \
---change-section-address .eeprom-0x810000 
+--change-section-address .eeprom-0x810000
 
 
 coff: $(TARGET).elf
@@ -456,7 +451,7 @@ extcoff: $(TARGET).elf
 %.o : %.c
 	@echo
 	@echo $(MSG_COMPILING) $<
-	$(CC) -c $(ALL_CFLAGS) $< -o $@ 
+	$(CC) -c $(ALL_CFLAGS) $< -o $@
 
 
 # Compile: create assembler files from C source files.
@@ -472,8 +467,7 @@ extcoff: $(TARGET).elf
 
 # Create preprocessed source for use in sending a bug report.
 %.i : %.c
-	$(CC) -E -mmcu=$(MCU) -I. $(CFLAGS) $< -o $@ 
-
+	$(CC) -E -mmcu=$(MCU) -I. $(CFLAGS) $< -o $@
 
 # Target: clean project.
 clean: begin clean_list end
@@ -494,16 +488,10 @@ clean_list :
 	$(REMOVE) $(SRC:.c=.d)
 	$(REMOVE) .dep/*
 
-
-
 # Include the dependency files.
 -include $(shell mkdir .dep 2>/dev/null) $(wildcard .dep/*)
-
 
 # Listing of phony targets.
 .PHONY : all begin finish end sizebefore sizeafter gccversion \
 build elf hex eep lss sym coff extcoff \
 clean clean_list program debug gdb-config
-
-
-

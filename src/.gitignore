@@ -1,0 +1,9 @@
+.dep/
+simon.eep
+simon.elf
+simon.hex
+simon.lss
+simon.lst
+simon.map
+simon.o
+simon.sym
